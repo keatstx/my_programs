@@ -1,0 +1,76 @@
+#Write a function called after_second that accepts two 
+#arguments: a target string to search, and string to search
+#for. The  function should return everything in the first
+#string *after* the *second* occurrence of the search term.
+#You can assume  there will always be at least two
+#occurrences of the search term in the first string. 
+#
+#For example:
+#  after_second("11223344554321", "3") -> 44554321
+#
+#The search term "3" appears at indices 4 and 5. So, this
+#returns everything from the index 6 to the end.
+#
+#  after_second("heyyoheyhi!", "hey") -> hi!
+#
+#The search term "hey" appears at indices 0 and 5. The
+#search term itself is three characters. So, this returns
+#everything from the index 8 to the end.
+#
+#Hint: This may be more complicated than it looks! You'll
+#have to look at the length of the search string and
+#either modify the target string or take advantage of the
+#extra arguments you can pass to find().
+
+
+#Write your function here!
+def after_second(target, search):
+    
+    stringL= len(search)
+    first = target.find(search)
+    second = target.find(search,first+1)
+    return target[second+stringL:]
+
+
+#Below are some lines of code that will test your function.
+#You can change the value of the variable(s) to test your
+#function with different inputs.
+#
+#If your function works correctly, this will originally
+#print 44554321 and hi!, each on their own line.
+print(after_second("11223344554321", "3"))
+print(after_second("heyyoheyhi!", "hey"))
+
+
+
+#answer key
+#We'll start with the function header as usual. target is
+#the string we're searching within, and search is the string
+#we're searching for:
+def after_second(target, search):
+    
+    #We can do this in two ways. First, let's do it with
+    #arguments to the find() method. First, we want to find
+    #the first place that search appears:
+    
+    first_loc = target.find(search)
+    
+    #Next, we want to find the second location where search
+    #appears:
+    
+    second_loc = target.find(search, first_loc + 1)
+    
+    #Now, second_loc stores the second place that search
+    #appears. We want to return everything from after that
+    #instance of search -- so, we add the length of search
+    #to move past it, and return that substring:
+    
+    return target[second_loc + len(search):]
+
+#We could do that other ways, too, though. Check out
+#sample_answer_2.py and sample_answer_3.py for more!
+
+
+print(after_second("11223344554321", "3"))
+print(after_second("heyyoheyhi!", "hey"))
+

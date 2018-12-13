@@ -1,0 +1,68 @@
+#Recall in Unit 3 you wrote a function that would count the
+#number of words in a string using loops. Now that you know
+#something about string methods, though, let's do that again
+#using a different approach.
+#
+#Write a function called "num_words" that accepts a string 
+#as an argument and returns the number of words in the 
+#string. You can assume all words are separated by a space,
+#and that the string has at least one word. You do not need
+#to worry about punctuation.
+#
+#For example:
+#
+#  num_words("Veni, Vidi, Vici.") -> 3
+#
+#This time, you may not use any loops. Hint: split() might
+#come in handy.
+
+
+#Write your function here!
+def num_words(string1):
+    words = string1.count(" ") +1
+    return words
+
+
+
+#Below are some lines of code that will test your function.
+#You can change the value of the variable(s) to test your
+#function with different inputs.
+#
+#If your function works correctly, this will originally
+#print: 3, 2, 1, each on their own line.
+print(num_words("Vini, Vidi, Vici."))
+print(num_words("Hello, world!"))
+print(num_words("HeyDavidwhyaren'ttherespacesinthissentence"))
+
+
+#answer key
+#First, we'll start with the function header:
+def num_words(sentence):
+    
+    #Using what we know now, we might see that the split()
+    #method can help us here! The split() method splits the
+    #string into a list of smaller strings, dividing it
+    #wherever the string that appears in parentheses is
+    #found. So, "two words".split(" ") would split into a
+    #list of two strings: "two" and "words".
+    #
+    #So, however many strings come out of the split(" ")
+    #call is the number of words in our sentence:
+    
+    return len(sentence.split(" "))
+    
+    #Given the assumption in the problem that spaces always
+    #indicate a new word, we could also use the string
+    #class's count() method. The count() method counts
+    #the number of instances of the string in parentheses.
+    #We'll want to add one because there is always one more
+    #word than spaces:
+    #
+    #return sentence.count(" ") + 1
+    
+
+print(num_words("Vini, Vidi, Vici."))
+print(num_words("Hello, world!"))
+print(num_words("HeyDavidwhyaren'ttherespacesinthissentence"))
+
+

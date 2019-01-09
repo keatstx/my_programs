@@ -1,0 +1,104 @@
+#Recall Coding Problem 4.3.9 (Advanced), the free body
+#diagram problem. If you were unable to solve that, we've
+#included the sample answer in the dropdown in the top left
+#-- feel free to use that to write your answer to this
+#problem.
+#
+#Revise your code from that problem to use a file instead of
+#a list as its parameter. Name this new function
+#find_net_force_from_file. The function should take one
+#parameter, the name of a file. The function should return
+#the net magnitude and direction, just as it did in the other
+#problem.
+#
+#Each line of the file will have two numbers, both integers:
+#the first number will be the magnitude, and the second
+#number will be the angle (in degrees, from -180 to 180).
+#There will be a space between them.
+#
+#HINT: You may have multiple functions in your code if you
+#want!
+#
+#HINT 2: Try to write this such that you can reuse as much
+#of your earlier code as possible. Remember, when loading
+#from a file, any text you load is initially a string. You'll
+#almost certainly need to use the split() method.
+
+from math import sin, cos, tan, asin, acos, atan2, radians, degrees, sqrt
+
+#Add your function here!
+def find_net_force_from_file(filename):
+    file = open(filename,"r")
+    data = []
+    
+    for pair in file:
+        pair = pair.strip()
+        pair = pair.split()
+        
+        item0=int(pair[0])
+        item1=int(pair[1])
+        
+        finalitem = item0,item1
+        
+        tupleitem = tuple(finalitem)
+        data.append(tupleitem)
+        
+        
+    total_horizontal = 0
+    total_vertical = 0
+    
+    #Now, let's iterate through each force in the forces:
+    for s in data:
+        s0 = s[0]
+        s1 = radians(s[1])    
+                      
+        #Now, the horizontal component is the magnitude
+        #times the cosine of the angle:
+        horizontal = s0 * cos(s1)
+        
+        #And the vertical component is the magnitude times
+        #the sine of the angle:
+        vertical = s0 * sin(s1)
+        
+        #Now that we've calculated the horizontal and
+        #vertical components, let's add those to our
+        #running tallies:
+        total_horizontal += horizontal
+        total_vertical += vertical
+    
+    #The net magnitude is the hypotenuse of the triangle
+    #with these two components as their legs. So, we can
+    #calculate the net magnitude using the Pythagorean
+    #theorem:
+    net_magnitude = sqrt(total_horizontal**2 + total_vertical**2)
+    
+    #Then as instructed, we round it to one decimal point:
+    net_magnitude = round(net_magnitude, 1)
+    
+    #Next, we need to calculate the angle. As directed, we
+    #do this with the atan2 function from Python's math
+    #library, which takes the vertical and horizontal
+    #components as arguments:
+    net_angle = atan2(total_vertical, total_horizontal)
+    
+    #Then, we convert this back to degrees:
+    net_angle = degrees(net_angle)
+    
+    #And round it to one decimal point as instructed:
+    net_angle = round(net_angle, 1)
+    file.close()
+    #Last, we return the tuple of the madnitude and angle:
+    return (net_magnitude, net_angle)
+
+
+#Below are some lines of code that will test your function.
+#You can change the value of the variable(s) to test your
+#function with different inputs.
+#
+#If your function works correctly, this will originally
+#print: (87.0, 54.4)
+print(find_net_force_from_file("a_few_angles.txt"))
+
+
+
+
